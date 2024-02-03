@@ -6,44 +6,59 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:12:27 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/03 14:49:51 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/03 21:38:09 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-std::string BitcoinWallet::FileError(std::string& file)
+void    BitcoinWallet::CleanString(std::string& line)
 {
-    std::cerr << "|++> We Cant Open Your File : " << "[-"<< file << "-]"<< std::endl;
-    std::cerr << "|++> Error Occured Process Terminating...!"<< std::endl;
-    return ("");
+    int     i = -1;
+    int     flg (0);
+	std::stringstream ss;
+    
+    while (line[++i])
+	{
+		if (line[i] == ' ' || line[i] == '\t')
+			flg = 1;
+		if (!(line[i] == ' ' || line[i] == '\t'))
+		{
+			if (flg)
+				ss << " ";
+			flg = 0;
+			ss << line[i];
+			}
+		}
+    line = ss.str();
 }
 
-void ReformLine(std::string& str) {
-  size_t first = 0;
+void    BitcoinWallet::ReformLine(std::string& str)
+{
+  size_t first = 0; 
   while (first < str.size() && std::isspace(str[first])) {
     ++first;
   }
+ 
   size_t last = str.size() - 1;
   while (last > first && std::isspace(str[last])) {
     --last;
   }
   str = str.substr(first, last - first + 1);
+  CleanString(str);
 }
 
-std::string     BitcoinWallet::Bitcoine(char **av)
+std::string     BitcoinWallet::Bitcoine()
 {
-    std::string     infilename = (av[1]);
     std::string     BitcoinLine;
-    std::ifstream   infile (infilename);
-
+    
     if (!infile.is_open())
         return (BitcoinWallet::FileError(infilename));
     try
     {
         if (std::getline(infile, BitcoinLine))
         {
-            if (!BitcoinLine.compare("Data | Value"))
+            if (!BitcoinLine.compare("date | value"))
                 throw ContinueToProcess();
             throw NoTitleBare();
         }
@@ -58,6 +73,7 @@ std::string     BitcoinWallet::Bitcoine(char **av)
                 break ;
             try{
                 ReformLine(BitcoinLine);
+                ParentGrammar(BitcoinLine);
                 std::cout << BitcoinLine << std::endl;
                 // LineProcessing
         }
@@ -75,10 +91,13 @@ int main (int ac, char **av)
     {
     case 2:
         try{
-            BitcoinWallet::Bitcoine(av);
+            BitcoinWallet Wallet(av[1]);
+            Wallet.Bitcoine();
+            Wallet.Claimfd();
         }
         catch(std::exception& e){
             std::cout << e.what() << std::endl;
+            // Wallet.Claimfd();can't acces it;
         }
         break;
     default:

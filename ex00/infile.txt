@@ -1,4 +1,2 @@
-Data | Value
-            lol             |    lil1
-            lil               |     lil1
-            lal  | lalaa    
+date | value
+a    a     | 

@@ -8,6 +8,10 @@ first Creat Exception Class :
     *OUT of range Amounts() of bitcoins;
         Using outofRange C++ exception;
     *
+    /*******************
+check empty file;
+check firstLine is Not Valiid;
+Next()....
 
 
 

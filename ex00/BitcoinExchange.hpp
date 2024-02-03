@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:13:10 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/03 13:30:26 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/03 14:18:14 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ class   BitcoinWallet
 {
     private :
         std::string InvalidInput;
-        static short int EmptyFile;
-        static short int BadtitleBar;
     public :
         // BitcoinWallet();
         static std::string Bitcoine(char **av);

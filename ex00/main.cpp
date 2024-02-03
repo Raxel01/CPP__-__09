@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:12:27 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/03 13:51:12 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/03 14:49:51 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,23 @@ std::string BitcoinWallet::FileError(std::string& file)
     return ("");
 }
 
+void ReformLine(std::string& str) {
+  size_t first = 0;
+  while (first < str.size() && std::isspace(str[first])) {
+    ++first;
+  }
+  size_t last = str.size() - 1;
+  while (last > first && std::isspace(str[last])) {
+    --last;
+  }
+  str = str.substr(first, last - first + 1);
+}
+
 std::string     BitcoinWallet::Bitcoine(char **av)
 {
     std::string     infilename = (av[1]);
     std::string     BitcoinLine;
     std::ifstream   infile (infilename);
-    EmptyFile = 0;
-    BadtitleBar = 0;
 
     if (!infile.is_open())
         return (BitcoinWallet::FileError(infilename));
@@ -47,6 +57,7 @@ std::string     BitcoinWallet::Bitcoine(char **av)
             if (!std::getline(infile, BitcoinLine))
                 break ;
             try{
+                ReformLine(BitcoinLine);
                 std::cout << BitcoinLine << std::endl;
                 // LineProcessing
         }

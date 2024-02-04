@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:14:05 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/03 21:51:57 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/04 10:07:59 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ const char* NoPositiveAmount::what() const throw(){
     return ("Error : The Amount is not a positive Number");
 }
 
-
 BitcoinWallet::BitcoinWallet(){}
 
 BitcoinWallet::BitcoinWallet(char *av) : infilename(av), infile(infilename)
@@ -60,9 +59,8 @@ void    BitcoinWallet::ParentGrammar(std::string&line)
             groups++;
             if (groups == 2) //Second elemnt in the line [1] [|] [2]
                 if (Box.compare("|"))
-                    throw ParentGrammarEx(); 
+                    throw ParentGrammarEx();
         }
-        std::cout << "==============================" << std::endl;
     }
     else
         throw ParentGrammarEx(); 

@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:12:27 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/05 10:02:24 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/05 15:47:26 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ std::string     BitcoinWallet::Bitcoine()
             try{
                 ReformLine(BitcoinLine);
                 ParentGrammar(BitcoinLine);
-                std::cout << BitcoinLine << std::endl;
-                // LineProcessing
+                extractDate(BitcoinLine);
+                extractValue(BitcoinLine); 
         }
             catch(const std::exception& e){
                 std::cerr << e.what() << std::endl;

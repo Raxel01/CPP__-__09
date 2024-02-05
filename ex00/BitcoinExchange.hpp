@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:13:10 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/03 20:55:53 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/04 13:01:34 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include <exception>
 #include <sstream>
 #include <fstream>
+#include <map>
+
+#define SUCCES "SUCCES"
 
 class NoDataInFile : public std::exception
 {
@@ -54,6 +57,9 @@ class   BitcoinWallet
         // std::string InvalidInput;
         std::string     infilename;
         std::ifstream   infile;
+        std::string     DataBaseinfile;
+        std::ifstream   DataBaseFile;
+        std::map<std::string, double> DataBase;
         // static const std::ifstream Copy;
     public :
         BitcoinWallet();
@@ -64,6 +70,7 @@ class   BitcoinWallet
         void    ParentGrammar(std::string &line);
         void    CleanString(std::string& line);
         void    ReformLine(std::string& str);
+        std::string    ImportDatabase();
         // static void reformeLine(std::string&)
         ~BitcoinWallet();
 };

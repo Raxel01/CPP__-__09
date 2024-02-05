@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:14:05 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/04 10:07:59 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/05 10:01:47 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ const char* NoPositiveAmount::what() const throw(){
 
 BitcoinWallet::BitcoinWallet(){}
 
-BitcoinWallet::BitcoinWallet(char *av) : infilename(av), infile(infilename)
+BitcoinWallet::BitcoinWallet(char *av) : infilename(av), infile(infilename), 
+    DataBaseinfile("data.csv"), DataBaseFile(DataBaseinfile)
 {}
 
 void    BitcoinWallet::Claimfd(){
     infile.close();
+    DataBaseFile.close();
 }
 
 BitcoinWallet::~BitcoinWallet(){}

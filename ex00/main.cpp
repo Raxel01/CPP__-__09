@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:12:27 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/03 21:38:09 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/05 10:02:24 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,25 +85,58 @@ std::string     BitcoinWallet::Bitcoine()
     return ("");
 }
 
+std::string    BitcoinWallet::ImportDatabase()
+{
+    std::string Line;
+    std::string ExctractDate;
+    std::string ExctactRate;
+    
+    if (!DataBaseFile.good())
+        return (BitcoinWallet::FileError(DataBaseinfile));
+    if (std::getline(DataBaseFile, Line))
+    {
+        if (!std::getline(DataBaseFile, Line))
+            throw NoDataInFile();
+        try{
+            ExctractDate = Line.substr(0,Line.find_first_of(","));
+            ExctactRate  = Line.substr(Line.find_first_of(",") + 1, Line.size());
+            DataBase.insert(std::pair<std::string, double>(ExctractDate, strtod(ExctactRate.c_str(), NULL)));
+            throw ContinueToProcess();
+        }catch(ContinueToProcess& e){
+            while (1)
+            {
+                if (!std::getline(DataBaseFile, Line))
+                    break;
+                ExctractDate = Line.substr(0,Line.find_first_of(","));
+                ExctactRate  = Line.substr(Line.find_first_of(",") + 1, Line.size());
+                DataBase.insert(std::pair<std::string, double>(ExctractDate, strtod(ExctactRate.c_str(),NULL)));
+            }
+        }
+    }
+    else
+        throw NoDataInFile();
+    return (SUCCES);
+}
+
 int main (int ac, char **av)
 {
-    switch (ac)
+    if (ac == 2)
     {
-    case 2:
-        try{
-            BitcoinWallet Wallet(av[1]);
+           BitcoinWallet Wallet(av[1]);
+           try{
+            if (Wallet.ImportDatabase() != SUCCES)
+                throw std::runtime_error("");
             Wallet.Bitcoine();
             Wallet.Claimfd();
         }
         catch(std::exception& e){
             std::cout << e.what() << std::endl;
-            // Wallet.Claimfd();can't acces it;
+            Wallet.Claimfd();
         }
-        break;
-    default:
-        std::cout << " [Error: We Can't Find  a file]"<< std::endl;
-        std::cout << " [Use  : ./btc [Specify a file]" << std::endl;
-        break;
+        
+    }else{
+            std::cout << " [Error: We Can't Find  a file]"<< std::endl;
+            std::cout << " [Use  : ./btc [Specify a file]" << std::endl;
     }
     return (0);
 }

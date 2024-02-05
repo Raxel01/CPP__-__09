@@ -1,4 +1,1 @@
 date | value
-    a       a       | => a | |
-a |abait
-R | A

@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:13:10 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/06 10:52:22 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:24:24 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <sstream>
 #include <fstream>
 #include <map>
+#include <cstdlib> 
+// #include <bits/stdc++.h>
 #include <time.h>
 
 #define SUCCES "SUCCES"

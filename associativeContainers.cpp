@@ -102,22 +102,24 @@ int main ()
   // std::string abdelali("ABDEL-ALI-AIT TALB");
 
   // std::cout << abdelali.substr(5,2)<< std::endl;  
-    // std::map<std::string, int, std::greater<std::string> > myMap;
+    std::map<std::string, int, std::greater<std::string> > myMap;
 
-    // myMap.insert(std::pair<std::string, int> ("Abdelali 7", 1));
-    // myMap.insert(std::pair<std::string, int> ("Abdelali 5", 2));
-    // myMap.insert(std::pair<std::string, int> ("Abdelali 0", 3));
-    // myMap.insert(std::pair<std::string, int> ("Abdelali 2", 4));
-    // myMap.insert(std::pair<std::string, int> ("Abdelali 1", 5));
+    myMap.insert(std::pair<std::string, int> ("Abdelali 7", 1));
+    myMap.insert(std::pair<std::string, int> ("Abdelali 5", 2));
+    myMap.insert(std::pair<std::string, int> ("Abdelali 9", 66));
+    myMap.insert(std::pair<std::string, int> ("Abdelali 0", 3));
+    myMap.insert(std::pair<std::string, int> ("Abdelali 2", 4));
+    myMap.insert(std::pair<std::string, int> ("Abdelali 1", 5));
 
-    // std::map<std::string, int>::iterator it = myMap.begin();
-    // it = myMap.lower_bound("Abdelali 6");
-    // std::cout << it->second << std::endl;
-    // it = myMap.begin();
-    // while (it != myMap.end()){
-    //     std::cout << "Key : " << it->first << "| Value : " << it->second << std::endl;
-    //     it++;
-    // }
+    std::map<std::string, int>::iterator it = myMap.begin();
+    it = myMap.lower_bound("Abdelali 6");
+    // it--;
+    std::cout << it->first << " == "<< it->second << std::endl;
+    it = myMap.begin();
+    while (it != myMap.end()){
+        std::cout << "Key : " << it->first << "| Value : " << it->second << std::endl;
+        it++;
+    }
 
 
     return 0;

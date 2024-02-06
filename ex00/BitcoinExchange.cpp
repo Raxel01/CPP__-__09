@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:14:05 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/06 10:53:43 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/06 11:59:13 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ void    BitcoinWallet::getDay()
         throw DateSyntaxeError();
     time_t theTime = time(NULL);
     struct tm *aTime = localtime(&theTime);
-    if ((year == 2009 && Day < 2) || (year == 2024 && month > 2 && Day > aTime->tm_mday))
+    if ((year == 2009 && Day < 2) || (year == 2024 && month >= 2 && Day > aTime->tm_mday))
         throw NosuitableDay();
 }
 

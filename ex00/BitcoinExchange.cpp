@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:14:05 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/06 11:59:13 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:59:01 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ BitcoinWallet::BitcoinWallet(){}
 
 BitcoinWallet::BitcoinWallet(char *av) : infilename(av), infile(infilename), 
     DataBaseinfile("data.csv"), DataBaseFile(DataBaseinfile)
-{}
+{
+    this->Claimfd();
+}
 
 void    BitcoinWallet::Claimfd(){
     infile.close();

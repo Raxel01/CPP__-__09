@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:12:27 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/05 15:47:26 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:58:19 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,11 +127,9 @@ int main (int ac, char **av)
             if (Wallet.ImportDatabase() != SUCCES)
                 throw std::runtime_error("");
             Wallet.Bitcoine();
-            Wallet.Claimfd();
         }
         catch(std::exception& e){
             std::cout << e.what() << std::endl;
-            Wallet.Claimfd();
         }
         
     }else{

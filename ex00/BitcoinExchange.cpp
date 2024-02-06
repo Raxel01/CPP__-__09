@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:14:05 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/05 16:28:10 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:53:43 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ const char* NoTitleBare::what() const throw(){
 
 
 const char* NoPositiveAmount::what() const throw(){
-    return ("Error : The Amount is not a positive Number");
+    return ("Amount is not a positive Number");
 }
 
 const char *DateSyntaxeError::what() const throw(){
@@ -40,6 +40,11 @@ const char *DateSyntaxeError::what() const throw(){
 
 const char *NonValidAmount::what() const throw(){
     return "The Entred Amount is Wrong !" ;
+}
+
+/*Change to the Day where i'll Push*/
+const char *NosuitableDay::what() const throw(){
+    return "No Data for you Date : limits [2009-01-02|=>2024-2-15]" ;
 }
 
 BitcoinWallet::BitcoinWallet(){}
@@ -145,6 +150,10 @@ void    BitcoinWallet::getDay()
     Day = atoi(Days.c_str());
     if (!(Day >= 1 && Day <= getNumberOfDays(month,year)))
         throw DateSyntaxeError();
+    time_t theTime = time(NULL);
+    struct tm *aTime = localtime(&theTime);
+    if ((year == 2009 && Day < 2) || (year == 2024 && month > 2 && Day > aTime->tm_mday))
+        throw NosuitableDay();
 }
 
 void    BitcoinWallet::extractDate(std::string& lineReaded){
@@ -166,17 +175,20 @@ void    BitcoinWallet::AmountVerification()
     
     if (AmountString[++i] == '-')//0
         throw  NoPositiveAmount();
+        
     while (AmountString[i] && AmountString[i] != '.'){
         if (!std::isdigit(AmountString[i]))
             throw  NonValidAmount();
         i++;
     }
-    
+    if (i == 0) // for '.' at begin
+        throw NonValidAmount();
     /*Pause*/
     if (AmountString[i] == '.')
     {
-        if (/*check i before check in string*/AmountString[i + 1])
+        if (AmountString[i + 1])
         {
+              i++;
               while (AmountString[i]){
                    if (!std::isdigit(AmountString[i]))
                         throw  NonValidAmount();
@@ -185,7 +197,14 @@ void    BitcoinWallet::AmountVerification()
         else
             throw NonValidAmount();
     }
-    
+}
+
+void    BitcoinWallet::Amountrange()
+{
+    if (AmountValue < 0)
+        throw std::out_of_range("too loow Amount ");
+    if (AmountValue > 1000)
+        throw std::out_of_range("too large Amount");
 }
 
 void    BitcoinWallet::extractValue(std::string& lineReaded){
@@ -193,5 +212,10 @@ void    BitcoinWallet::extractValue(std::string& lineReaded){
     AmountString = lineReaded.substr(lineReaded.find('|') + 2);
     AmountVerification();
     AmountValue = strtod(AmountString.c_str(), NULL);
-    std::cout << "|" << std::fixed << std::setprecision(10) << AmountValue<< "|" << std::endl;
+    Amountrange();
+    std::map<std::string, double>::iterator it;
+
+    it = DataBase.lower_bound(FullDate);
+    
+    std::cout << FullDate << " ==> " <<  AmountString << " = " <<std::fixed << std::setprecision(2) << AmountValue * it->second << std::endl;
 }

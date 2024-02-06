@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:13:10 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/05 16:15:08 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/06 10:52:22 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <sstream>
 #include <fstream>
 #include <map>
+#include <time.h>
 
 #define SUCCES "SUCCES"
 
@@ -55,9 +56,15 @@ class NonValidAmount : public std::exception
 {
     public :
         virtual const char* what() const throw();
-}
+};
 
 class DateSyntaxeError : public std::exception
+{
+    public :
+        virtual const char* what() const throw();
+};
+
+class NosuitableDay : public std::exception
 {
     public :
         virtual const char* what() const throw();
@@ -71,7 +78,7 @@ class   BitcoinWallet
         std::ifstream                   infile;
         std::string                     DataBaseinfile;
         std::ifstream                   DataBaseFile;
-        std::map<std::string, double>   DataBase;
+        std::map<std::string, double, std::greater<std::string> >   DataBase;
         std::string                     FullDate;
         int                             year;
         int                             month;
@@ -95,6 +102,7 @@ class   BitcoinWallet
         void    AmountVerification();
         void    PurDigit(std::string& Date);
         std::string    ImportDatabase();
+        void    Amountrange();
         // static void reformeLine(std::string&)
         ~BitcoinWallet();
 };

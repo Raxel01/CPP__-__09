@@ -12,6 +12,7 @@ first Creat Exception Class :
 check empty file;
 check firstLine is Not Valiid;
 Next()....
+I didn't READ' ALL DETAILS HERE BUT THE EXERCICE IS END
 
 
 

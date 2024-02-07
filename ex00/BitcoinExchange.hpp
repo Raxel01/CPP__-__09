@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:13:10 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/06 12:24:24 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:44:45 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ class   BitcoinWallet
         std::string                     AmountString;
     public :
         BitcoinWallet();
+        BitcoinWallet(const BitcoinWallet &origine);
+        BitcoinWallet& operator=(const BitcoinWallet &origine);
         BitcoinWallet(char *av);
         void Claimfd();
         std::string     Bitcoine();
@@ -105,7 +107,6 @@ class   BitcoinWallet
         void    PurDigit(std::string& Date);
         std::string    ImportDatabase();
         void    Amountrange();
-        // static void reformeLine(std::string&)
         ~BitcoinWallet();
 };
 

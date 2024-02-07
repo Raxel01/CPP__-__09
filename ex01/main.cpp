@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 20:59:35 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/06 21:01:14 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:42:26 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,18 @@ int main (int ac, char **av)
     switch (ac)
     {
     case 2:
-        /* code */
+        try{
+            std::string operation(av[1]);
+            RPN::ParseOperation(operation);
+            RPN::FinalResult(operation);
+        }
+        catch(const std::exception& e){
+            std::cerr << e.what() << std::endl;
+        }
         break;
-    
     default:
-        std::cout << "Hi useer"<< std::endl;
+        std::cout << " Hi Useer !"<< std::endl;
+        std::cout << " Try [ ./RPN \"rpn to calculate\"]" << std::endl;
         break;
     }
     

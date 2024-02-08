@@ -169,6 +169,7 @@ void    BitcoinWallet::getDay()
     Day = atoi(Days.c_str());
     if (!(Day >= 1 && Day <= getNumberOfDays(month,year)))
         throw DateSyntaxeError();
+    
     time_t theTime = time(NULL);
     struct tm *aTime = localtime(&theTime);
     if ((year == 2009 && Day < 2) || (year == 2024 && month >= 2 && Day > aTime->tm_mday))
@@ -203,10 +204,8 @@ void    BitcoinWallet::AmountVerification()
     if (i == 0) // for '.' at begin
         throw NonValidAmount();
     /*Pause*/
-    if (AmountString[i] == '.')
-    {
-        if (AmountString[i + 1])
-        {
+    if (AmountString[i] == '.'){
+        if (AmountString[i + 1]){
               i++;
               while (AmountString[i]){
                    if (!std::isdigit(AmountString[i]))

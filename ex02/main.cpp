@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/06 20:59:35 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/07 20:34:43 by abait-ta         ###   ########.fr       */
+/*   Created: 2024/02/07 13:43:35 by abait-ta          #+#    #+#             */
+/*   Updated: 2024/02/08 17:47:48 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "RPN.hpp"
+#include "PmergeMe.hpp"
 
 int main (int ac, char **av)
 {
@@ -18,19 +18,18 @@ int main (int ac, char **av)
     {
     case 2:
         try{
-            std::string operation(av[1]);
-            RPN::ParseOperation(operation);
-            RPN::FinalResult(operation);
-        }
-        catch(const std::exception& e){
-            std::cerr << e.what() << std::endl;
+            PmergeMe Sorted(av[1]);
+            Sorted.ParsInput();
+            std::cout << "::Parse <-> OK::"<< std::endl;
+            
+        }catch(std::exception& e){
+            std::cout << e.what() << std::endl;
         }
         break;
     default:
-        std::cout << " Hi Useer !"<< std::endl;
-        std::cout << " Try [ ./RPN \"rpn to calculate\"]" << std::endl;
+        std::cout << "[ No     Enough  Arguments  ]"<< std::endl;
+        std::cout << "[ use  ./PmergMe  \"numbers\" ]"<< std::endl;
         break;
     }
-    
     return (0);
 }

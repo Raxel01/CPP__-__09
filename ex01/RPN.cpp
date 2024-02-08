@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 12:26:23 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/07 12:38:46 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/07 20:23:27 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ const char* NonValidInput::what()const throw()
 
 const char* ElemsInStack::what()const throw()
 {
-    std::cout << "You Have a Stucked elements in stack" << std::endl;
+    std::cout << "More Than One element Or Non in stack" << std::endl;
     return "===> Error : non Valid input"; 
 }
 
@@ -73,9 +73,9 @@ void  RPN::FinalResult(std::string &operation)
             }
         }
     }
-    if (Mystack.size() > 1)
+    if (Mystack.size() != 1)
         throw ElemsInStack();
-    std::cout << Mystack.top()<< std::endl;
+    std::cout << Mystack.top() << std::endl;
 }
 
 std::stack<int> RPN::Mystack        ;
@@ -128,11 +128,11 @@ void        RPN::ParseOperation(std::string& operation)
         }
         std::stringstream stream(operation);
         std::string catchestring;
+
         while (stream >> catchestring){
             if (catchestring.length() > 1)
                 throw NonValidInput();
         }
-        
     }
     else
         throw EmptyString();

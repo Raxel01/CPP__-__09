@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 20:38:13 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/09 08:49:14 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:42:07 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ class PmergeMe
         std::string Numbers;
         short int   visited;
         long long   elements;
+        std::vector<int> Vector;
     public:
         PmergeMe();
         PmergeMe(char *av);
@@ -38,7 +39,7 @@ class PmergeMe
         void              Timer(std::string container, double time);    
         void              ParsInput();
         void              InputState(std::string& holder);
-        void              beforeSorting(std::string& holder);
+        void              beforeSorting();
         ~PmergeMe();
 
 };

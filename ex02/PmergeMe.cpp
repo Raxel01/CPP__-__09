@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 20:42:52 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/09 08:49:51 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/09 16:44:08 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,19 @@ void    PmergeMe::InputState(std::string& holder)
     elements = strtol(holder.c_str(), NULL, 0);
     if (elements > 2147483647)
         throw NonValidinput();
+    Vector.push_back(static_cast<int>(elements));
 }
 
-void    PmergeMe::beforeSorting(std::string& holder)
+void    PmergeMe::beforeSorting()
 {
+    std::vector<int>::iterator it = Vector.begin();
+    
     std::cout << "Before : ";
-    std::stringstream stream (Numbers);
-     while (stream >> holder){
-        std::cout << holder << " ";
+    while(it != Vector.end()){
+        std::cout << *it << " ";
+        it++;
     }
-    std::cout << "" << std::endl;
-    stream.clear();
+    std::cout << ""<< std::endl;
 }
 
 void    PmergeMe::ParsInput(){
@@ -91,5 +93,5 @@ void    PmergeMe::ParsInput(){
     if (!visited)
         throw NonValidinput();
     ss.clear();
-    beforeSorting(holder);
+    beforeSorting();
 }

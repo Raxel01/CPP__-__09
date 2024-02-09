@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 20:42:52 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/08 17:59:24 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/09 08:49:51 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& origine){
     return (*this);
 }
 
+void              PmergeMe::Timer(std::string STLtype, double time){
+    
+    std::cout <<"Time to process a range of " << "XXX"  << 
+    " elements with std::[" << STLtype << "] : " << time << " us"<<std::endl;
+}
+
 void    PmergeMe::InputState(std::string& holder)
 {
     int i (-1);
@@ -57,6 +63,9 @@ void    PmergeMe::InputState(std::string& holder)
             throw NonValidinput();
         i++;
     }
+    elements = strtol(holder.c_str(), NULL, 0);
+    if (elements > 2147483647)
+        throw NonValidinput();
 }
 
 void    PmergeMe::beforeSorting(std::string& holder)

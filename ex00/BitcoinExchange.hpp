@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:13:10 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/07 12:44:45 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/08 20:41:50 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,16 @@ class NosuitableDay : public std::exception
         virtual const char* what() const throw();
 };
 
+typedef std::map<std::string, double, std::greater<std::string> > MAP;
+
 class   BitcoinWallet
 {
     private :
-        // std::string InvalidInput;
         std::string                     infilename;
         std::ifstream                   infile;
         std::string                     DataBaseinfile;
         std::ifstream                   DataBaseFile;
-        std::map<std::string, double, std::greater<std::string> >   DataBase;
+                  MAP                   DataBase;
         std::string                     FullDate;
         int                             year;
         int                             month;

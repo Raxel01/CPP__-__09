@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 20:38:13 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/08 17:58:14 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/09 08:49:14 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <map>
 #include <deque>
 #include <sstream>
+#include <limits.h>
 
 class NonValidinput : public std::exception{
     
@@ -27,12 +28,14 @@ class PmergeMe
 {
     private:
         std::string Numbers;
-        short int visited;
+        short int   visited;
+        long long   elements;
     public:
         PmergeMe();
         PmergeMe(char *av);
         PmergeMe(const PmergeMe& origine);
         PmergeMe& operator=(const PmergeMe& origine);
+        void              Timer(std::string container, double time);    
         void              ParsInput();
         void              InputState(std::string& holder);
         void              beforeSorting(std::string& holder);

@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 20:38:13 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/10 18:38:03 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/10 21:49:16 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ class PmergeMe
         Pairtype            Paired;
         size_t              _VectorSize;
         int                 _LastValue;
-        
+        std::vector<int>    _Mainchaine;
+        std::vector<int>    _Pendchaine;
     public:
         PmergeMe();
         PmergeMe(char *av);
@@ -49,6 +50,7 @@ class PmergeMe
         void              PairSort();
         void              mergeSort( size_t begin, size_t end );
         void              Sortsubs(size_t begin, int midle, size_t end);
+        void              Main_PendChaine();
         ~PmergeMe();
 
 };

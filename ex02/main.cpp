@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:43:35 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/10 20:58:45 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/10 21:56:03 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,38 @@
 #include <vector>
 #include <algorithm>
 
+    
+    // (void)(firstSubVectLen);
+    // (void)secondSubVectLen;
+    // (void)firstsubVector;
+    // (void)secondsubVector;
+    
 #define SECOND secondSubVectLen;
+
 void    PmergeMe::Sortsubs(size_t begin, int midle, size_t end){
 
-    size_t firstSubVectLen  = (midle - begin + 1);
-    size_t secondSubVectLen = end - midle;
-
+    size_t      firstSubVectLen  = (midle - begin + 1);
+    size_t      secondSubVectLen = end - midle;
     Pairtype    firstsubVector;
     Pairtype    secondsubVector;
-    
-    (void)(firstSubVectLen);
-    (void)secondSubVectLen;
-    (void)firstsubVector;
-    (void)secondsubVector;
-    
-    // copy to first subvector
+
     for(size_t i = 0; i < firstSubVectLen; i++){
         firstsubVector.push_back(std::make_pair(Paired.at(begin + i).first, Paired.at(begin + i).second) );
     }
+    
     for (size_t i = 0; i < secondSubVectLen; i++){
         secondsubVector.push_back(std::make_pair(Paired.at(midle + 1+ i).first, Paired.at(midle + 1 + i).second));
     }
-
     for(size_t i = 0, j = 0, k = begin; k <= end; k++){
-        if (i < firstSubVectLen &&  (j >= secondSubVectLen || firstsubVector.at(i).first <= secondsubVector.at(i).first)){
+        if (i < firstSubVectLen &&  (j >= secondSubVectLen || firstsubVector.at(i).first <= secondsubVector.at(j).first)){
             Paired[k] = firstsubVector[i];
             i++;
-        }else {
+        }
+        else {
             Paired[k] = secondsubVector[j];
             j++;
-        }
-        
+        }   
     }
-    
 }
 
 void    PmergeMe::mergeSort( size_t begin, size_t end )
@@ -56,10 +55,37 @@ void    PmergeMe::mergeSort( size_t begin, size_t end )
     if (begin >= end)
         return ;
     int midle = begin + (end - begin) / 2;    
+
     mergeSort( begin, midle  );
     mergeSort( midle + 1, end);
     Sortsubs(begin, midle, end);
 }
+
+void PmergeMe::Main_PendChaine()
+{
+    for(size_t i = 0; i < Paired.size(); i++){
+        _Mainchaine.push_back(Paired.at(i).first);
+        _Pendchaine.push_back(Paired.at(i).second);
+    }
+    
+    std::cout << "main chaine : "<< " ";
+    for (size_t i = 0; i < _Mainchaine.size(); i++){
+        std::cout << _Mainchaine.at(i) << " ";
+    }
+    std::cout<<std::endl;
+
+    std::cout << "=================Separator============="<< std::endl;
+    std::cout << "pend chaine : "<< " ";
+    for (size_t i = 0; i < _Pendchaine.size(); i++){
+        std::cout << _Pendchaine.at(i) << " ";
+    }
+    std::cout<<std::endl;
+
+    
+
+}
+
+
 
 void    PmergeMe::PairSort()
 {
@@ -75,15 +101,12 @@ void    PmergeMe::PairSort()
             std::swap(Paired.at(j).first, Paired.at(j).second);
         j++;
     }
-     for(size_t i = 0; i < Paired.size(); i++){
-        std::cout << Paired.at(i).first << " | "<<Paired.at(i).second << std::endl;
-    }
-    std::cout << "============================" << std::endl;
     mergeSort(0, Paired.size() - 1);
-    
+    std::cout << "============================" << std::endl;
     for(size_t i = 0; i < Paired.size(); i++){
-        std::cout << Paired.at(i).first << " | "<<Paired.at(i).second << std::endl;
+        std::cout << std::setw(5) <<Paired.at(i).first << std::setw(4) << " | "<<Paired.at(i).second << std::endl;
     }
+    Main_PendChaine();
 }
 
 int main (int ac, char **av)

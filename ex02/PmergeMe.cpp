@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 20:42:52 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/09 16:44:08 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/10 17:00:27 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ PmergeMe::PmergeMe(){
     
 }
 
-PmergeMe::PmergeMe(char *av) : Numbers(av), visited(0){
+PmergeMe::PmergeMe(char *av) : Numbers(av), visited(0), _LastValue(-1){
     
 }
 
@@ -38,7 +38,6 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& origine){
     
     if (this != &origine){
         Numbers = origine.Numbers;
-
     }
     return (*this);
 }
@@ -79,6 +78,7 @@ void    PmergeMe::beforeSorting()
         it++;
     }
     std::cout << ""<< std::endl;
+    _VectorSize = Vector.size();
 }
 
 void    PmergeMe::ParsInput(){

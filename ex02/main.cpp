@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 13:43:35 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/09 16:39:52 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/10 20:58:45 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,42 +16,75 @@
 #include <vector>
 #include <algorithm>
 
-// template<typename T>
-// void    Mswap(T& a, T&b){
-//     T tmp;
-//     tmp = a;
-//     a = b;
-//     b = tmp;    
-// }
+#define SECOND secondSubVectLen;
+void    PmergeMe::Sortsubs(size_t begin, int midle, size_t end){
 
-// template <typename T>
-// void    recurs_it(T &elem , size_t len = 9, size_t start = 0, size_t end = 1)
-// {
-//     if (end >= len)
-//         return ;
-//     if (elem[start] > elem[end])
-//         std::swap(elem[start],  elem[end]);
-//     recurs_it(elem, len, start+2, end+2);
-// }
+    size_t firstSubVectLen  = (midle - begin + 1);
+    size_t secondSubVectLen = end - midle;
 
-// template <typename T>
-// void  findSmall(T& vect)
-// {
-//     typedef typename T::iterator iter;
+    Pairtype    firstsubVector;
+    Pairtype    secondsubVector;
     
-//     iter beg = vect.begin();
-//     iter min = vect.begin();
-//     while (beg != vect.end() - 1){
-//         if (*beg < *min)
-//             min = beg;
-//         beg += 2;
-//     }
-//     int tmp1 = *min;
-//     int tmp2 = *(min+1);
-//     vect.erase(min, min + 2);
-//     vect.insert(vect.begin(), tmp2);    
-//     vect.insert(vect.begin(), tmp1);
-// }
+    (void)(firstSubVectLen);
+    (void)secondSubVectLen;
+    (void)firstsubVector;
+    (void)secondsubVector;
+    
+    // copy to first subvector
+    for(size_t i = 0; i < firstSubVectLen; i++){
+        firstsubVector.push_back(std::make_pair(Paired.at(begin + i).first, Paired.at(begin + i).second) );
+    }
+    for (size_t i = 0; i < secondSubVectLen; i++){
+        secondsubVector.push_back(std::make_pair(Paired.at(midle + 1+ i).first, Paired.at(midle + 1 + i).second));
+    }
+
+    for(size_t i = 0, j = 0, k = begin; k <= end; k++){
+        if (i < firstSubVectLen &&  (j >= secondSubVectLen || firstsubVector.at(i).first <= secondsubVector.at(i).first)){
+            Paired[k] = firstsubVector[i];
+            i++;
+        }else {
+            Paired[k] = secondsubVector[j];
+            j++;
+        }
+        
+    }
+    
+}
+
+void    PmergeMe::mergeSort( size_t begin, size_t end )
+{
+    if (begin >= end)
+        return ;
+    int midle = begin + (end - begin) / 2;    
+    mergeSort( begin, midle  );
+    mergeSort( midle + 1, end);
+    Sortsubs(begin, midle, end);
+}
+
+void    PmergeMe::PairSort()
+{
+    if (_VectorSize % 2 != 0){
+        _LastValue = Vector.at(_VectorSize - 1);
+        _VectorSize--;
+    }
+    
+    int j (0);
+    for (size_t i = 0; i < _VectorSize; i += 2){
+        Paired.push_back(std::make_pair(Vector.at(i), Vector.at(i + 1)));
+        if (Paired.at(j).first < Paired.at(j).second)
+            std::swap(Paired.at(j).first, Paired.at(j).second);
+        j++;
+    }
+     for(size_t i = 0; i < Paired.size(); i++){
+        std::cout << Paired.at(i).first << " | "<<Paired.at(i).second << std::endl;
+    }
+    std::cout << "============================" << std::endl;
+    mergeSort(0, Paired.size() - 1);
+    
+    for(size_t i = 0; i < Paired.size(); i++){
+        std::cout << Paired.at(i).first << " | "<<Paired.at(i).second << std::endl;
+    }
+}
 
 int main (int ac, char **av)
 {
@@ -61,7 +94,7 @@ int main (int ac, char **av)
         try{
             PmergeMe Sorted(av[1]);
             Sorted.ParsInput();
-            
+            Sorted.PairSort();
             // Sorted.Timer("vector", 0.00033);            
             // Sorted.Timer("deque", 0.00039);            
         }catch(std::exception& e){
@@ -72,30 +105,6 @@ int main (int ac, char **av)
         std::cout << "[ No     nough  Arguments  ]"<< std::endl;
         std::cout << "[ use  ./PmergMe  \"numbers\" ]"<< std::endl;
         break;
-    }
-    // (void)ac;
-    // (void)av; // 0=1, 1=2
-    // std::vector<int> vectoro;
-    // vectoro.push_back(9);
-    // vectoro.push_back(8);
-    // vectoro.push_back(6);
-    // vectoro.push_back(0);
-    // vectoro.push_back(3);
-    // vectoro.push_back(2);
-    // vectoro.push_back(7);
-    // vectoro.push_back(5);
-    // vectoro.push_back(1);
-    
-    // clock_t start_time = clock();
-    // recurs_it(vectoro);
-    // // findSmall(vectoro);
-    // clock_t end_time = clock();
-    // std::cout << "Time : " <<std::fixed << std::setprecision(6) <<double(end_time - start_time) / CLOCKS_PER_SEC << std::endl;
-    // std::vector<int>::iterator beg = vectoro.begin();
-    
-    // while (beg != vectoro.end()){
-    //     std::cout << *beg << std::endl;
-    //     beg++;
-    // }    
+    }  
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 20:38:13 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/09 16:42:07 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/10 18:38:03 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,19 @@ class NonValidinput : public std::exception{
         virtual const char *what() const throw();
 };
 
+typedef  std::vector<std::pair<int, int> > Pairtype;
+
 class PmergeMe
 {
     private:
-        std::string Numbers;
-        short int   visited;
-        long long   elements;
-        std::vector<int> Vector;
+        std::string         Numbers;
+        short int           visited;
+        long long           elements;
+        std::vector<int>    Vector;
+        Pairtype            Paired;
+        size_t              _VectorSize;
+        int                 _LastValue;
+        
     public:
         PmergeMe();
         PmergeMe(char *av);
@@ -40,6 +46,9 @@ class PmergeMe
         void              ParsInput();
         void              InputState(std::string& holder);
         void              beforeSorting();
+        void              PairSort();
+        void              mergeSort( size_t begin, size_t end );
+        void              Sortsubs(size_t begin, int midle, size_t end);
         ~PmergeMe();
 
 };

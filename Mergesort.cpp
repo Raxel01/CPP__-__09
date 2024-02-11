@@ -118,8 +118,7 @@ int main()
     std::cout << arr_size - 1<< std::endl;
     exit(0);
     mergeSort(arr, 0, arr_size - 1); 
-  
     cout << "Sorted array is "<<endl; 
     printArray(arr, arr_size); 
-    return 0; 
+    return 0;
 } 

@@ -6,12 +6,12 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 20:42:52 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/10 17:00:27 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/11 20:05:16 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
-
+#include <iomanip>
 const char* NonValidinput::what() const throw()
 {
     return ("Non Valid character in Your input");
@@ -33,19 +33,25 @@ PmergeMe::PmergeMe(const PmergeMe& origine){
 
     *this = origine;
 }
+std::vector<int>    PmergeMe::GetVector() const{
+    return (Vector);
+}
 
 PmergeMe& PmergeMe::operator=(const PmergeMe& origine){
     
     if (this != &origine){
-        Numbers = origine.Numbers;
+        Numbers     = origine.Numbers;
+        Vector      = origine.Vector;
+        vectorend   = origine.vectorend;
+        vectorStart = origine.vectorStart;
     }
     return (*this);
 }
 
-void              PmergeMe::Timer(std::string STLtype, double time){
+void              PmergeMe::TimerVect(std::string STLtype){
     
-    std::cout <<"Time to process a range of " << "XXX"  << 
-    " elements with std::[" << STLtype << "] : " << time << " us"<<std::endl;
+    std::cout <<"Time to process a range of " << Vector.size() << " elements with std::[" << STLtype << "] : " <<
+    std::fixed << std::setprecision(8) << (double)(vectorend - vectorStart) << " us"<<std::endl;
 }
 
 void    PmergeMe::InputState(std::string& holder)
@@ -93,5 +99,6 @@ void    PmergeMe::ParsInput(){
     if (!visited)
         throw NonValidinput();
     ss.clear();
+    
     beforeSorting();
 }

@@ -2,25 +2,6 @@
 #include <iostream>
 #include <vector>
 
-template<typename T>
-void    insertion(T &elem, size_t begin, size_t end)
-{
-    size_t start = begin + 1;
-    int j;
-    int Value;
-    
-    while (start < end){
-        j = start - 1;
-        Value = elem[start];
-        while (j >= 0 && Value <= elem[j]){
-            std::cout << "Value : " << Value << " | j+1 : " << elem.at(j + 1) << " | j :" << elem.at(j) << std::endl;
-            std::swap(elem[j + 1], elem[j]);
-            j--;  
-        }
-        start++;
-    }
-}
-
 int main ()
 {
     std::vector<int> Myvect;

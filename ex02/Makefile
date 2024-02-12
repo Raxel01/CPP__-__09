@@ -6,11 +6,11 @@
 #    By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/28 16:45:48 by aechafii          #+#    #+#              #
-#    Updated: 2024/02/07 13:43:17 by abait-ta         ###   ########.fr        #
+#    Updated: 2024/02/12 11:16:51 by abait-ta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = main.cpp PmergeMe.cpp
+SRC = main.cpp PmergeMe.cpp Deque.cpp
 
 CXX = c++
 

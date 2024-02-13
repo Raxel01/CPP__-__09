@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:14:05 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/07 13:02:46 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/13 14:16:20 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ const char *NonValidAmount::what() const throw(){
 
 /*Change to the Day where i'll Push*/
 const char *NosuitableDay::what() const throw(){
-    return "No Data for you Date : limits [2009-01-02|=>2024-2-15]" ;
+    return "No Data for you Date : limits [2009-01-02|=>2024-2-13]" ;
 }
 
 BitcoinWallet::BitcoinWallet(){}
@@ -91,7 +91,7 @@ void    BitcoinWallet::ParentGrammar(std::string&line)
         while(stream >> Box)
         {
             groups++;
-            if (groups == 2) //Second elemnt in the line [1] [|] [2]
+            if (groups == 2) //Second elemnt in the line [1] [|] [3]
                 if (Box.compare("|"))
                     throw ParentGrammarEx();
         }
@@ -232,8 +232,7 @@ void    BitcoinWallet::extractValue(std::string& lineReaded){
     AmountValue = strtod(AmountString.c_str(), NULL);
     Amountrange();
     std::map<std::string, double>::iterator it;
-
-    it = DataBase.lower_bound(FullDate);
     
+    it = DataBase.lower_bound(FullDate);
     std::cout << FullDate << " ==> " <<  AmountString << " = " <<std::fixed << std::setprecision(2) << AmountValue * it->second << std::endl;
 }

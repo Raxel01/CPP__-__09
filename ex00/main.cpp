@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 16:12:27 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/06 12:58:19 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/12 18:35:05 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void    BitcoinWallet::CleanString(std::string& line)
 {
-    int     i = -1;
-    int     flg (0);
+    int               i   (-1);
+    int               flg (0);
 	std::stringstream ss;
     
     while (line[++i])
@@ -35,7 +35,7 @@ void    BitcoinWallet::CleanString(std::string& line)
 
 void    BitcoinWallet::ReformLine(std::string& str)
 {
-  size_t first = 0; 
+  size_t first = 0;
   while (first < str.size() && std::isspace(str[first])) {
     ++first;
   }
@@ -66,7 +66,6 @@ std::string     BitcoinWallet::Bitcoine()
             throw NoDataInFile();
 
     }catch(ContinueToProcess& e){
-        std::cout << "Bdat Lkhedma"<< std::endl;
         while (1)
         {
             if (!std::getline(infile, BitcoinLine))

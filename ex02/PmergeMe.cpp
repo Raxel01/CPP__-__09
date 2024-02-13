@@ -6,7 +6,7 @@
 /*   By: abait-ta <abait-ta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 20:42:52 by abait-ta          #+#    #+#             */
-/*   Updated: 2024/02/12 16:53:26 by abait-ta         ###   ########.fr       */
+/*   Updated: 2024/02/12 17:45:22 by abait-ta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,10 +190,15 @@ void PmergeMe::Main_PendChaine()
     }
     insertion(_Pendchaine, 0, _Pendchaine.size());
     insertion(_Mainchaine, 0, _Mainchaine.size());
-    _Mainchaine.insert(_Mainchaine.begin(), _Pendchaine.begin(), _Pendchaine.end());
-    insertion(_Mainchaine, 0, _Mainchaine.size());
+    /************************************Here**********/
+    // _Mainchaine.insert(_Mainchaine.begin(), _Pendchaine.begin(), _Pendchaine.end());
+    _Pendchaine.insert(_Pendchaine.end(), _Mainchaine.begin(), _Mainchaine.end());
+    /******************************************************/
+    // insertion(_Mainchaine, 0, _Mainchaine.size());
+    insertion(_Pendchaine, 0, _Pendchaine.size());
+    /*************************************************/
     Vector.clear();
-    Vector.insert(Vector.begin(), _Mainchaine.begin(), _Mainchaine.end());
+    Vector.insert(Vector.begin(), _Pendchaine.begin(), _Pendchaine.end());
     if (_LastValue != -1)
         Vector.push_back(_LastValue);
     insertion(Vector, 0, Vector.size());
@@ -226,10 +231,10 @@ void    PmergeMe::PairSort(MyDeque& DequeObject)
     mergeSort(0, Paired.size() - 1);
     Main_PendChaine();
     vectorend = clock();
-    // std::cout << "After  : ";
-    // for (size_t i = 0; i < Vector.size(); i++){
-    //     std::cout << Vector.at(i) << " " ;
-    // }
+    std::cout << "After  : ";
+    for (size_t i = 0; i < Vector.size(); i++){
+        std::cout << Vector.at(i) << " " ;
+    }
     std::cout << std::endl;
     TimerVect("vector");
 }
